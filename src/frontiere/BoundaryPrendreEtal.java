@@ -27,7 +27,13 @@ public class BoundaryPrendreEtal {
 		StringBuilder question = new StringBuilder();
 		question.append("c'est parfait il me reste un etal pour vous !\n");
 		question.append("il me faudrait quelques renseignement :\n");
-		Clavier.entrerChaine(question.toString);
+		question.append("Quels produits souhaitez vous vendre ?\n");
+		String produit = Clavier.entrerChaine(question.toString());
+		question.setLength(0);
+		question.append("Combien souhaitez vous en vendre ?\n");
+		int nb = Clavier.entrerEntier(question.toString());
+		controlPrendreEtal.prendreEtal(nomVendeur, produit, nb);
+		
 		
 		
 	}

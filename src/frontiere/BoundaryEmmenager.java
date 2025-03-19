@@ -47,14 +47,17 @@ public class BoundaryEmmenager {
 		question.append("Bienvenue druide " + nomVisiteur + "\n");
 		question.append("Quelle est votre force ?\n");
 		int force = Clavier.entrerEntier(question.toString());
+		question.setLength(0);
 		int effetPotionMax = -1;
 		int effetPotionMin = 0;
 		do {
 			question.append("Quelle est la force de potion la plus faible que vous produisez ?\n");
-			int effetPotionMin = Clavier.entrerEntier(question.toString());
+			effetPotionMin = Clavier.entrerEntier(question.toString());
+			question.setLength(0);
 			question.append("Quelle est la force de potion la plus forte que vous produisez ?\n");
-			int effetPotionMax = Clavier.entrerEntier(question.toString());
+			effetPotionMax = Clavier.entrerEntier(question.toString());
 			if (effetPotionMax < effetPotionMin) {
+				question.setLength(0);
 				question.append("Attention Druide, vous vous etes trompe entre le minimum et le maximum\n");
 			}
 		} while (effetPotionMax < effetPotionMin);
