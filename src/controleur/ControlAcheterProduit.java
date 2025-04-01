@@ -29,4 +29,7 @@ public class ControlAcheterProduit {
 		return controlTrouverEtalVendeur.trouverEtalVendeur(vendeur);
 	}
 	
+	public int acheterProduit(String nomVendeur, int quantitee) {
+		return getEtalVendeur(nomVendeur).acheterProduit(quantitee);
+	}
 }

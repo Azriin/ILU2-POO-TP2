@@ -1,9 +1,7 @@
 package frontiere;
 
-import java.util.List;
 
 import controleur.ControlAcheterProduit;
-import controleur.ControlVerifierIdentite;
 import personnages.Gaulois;
 
 public class BoundaryAcheterProduit {
@@ -15,29 +13,42 @@ public class BoundaryAcheterProduit {
 
 	public void acheterProduit(String nomAcheteur) {
 		if (!controlAcheterProduit.verifierIdentite(nomAcheteur)) {
-			System.out.println("Je suis désolée " + nomAcheteur + " mais il faut être un habitant de notre village pour commercer ici.");
+			System.out.println("Je suis desolee " + nomAcheteur + " mais il faut etre un habitant de notre village pour commercer ici.");
 		} else {
 			StringBuilder question = new StringBuilder();
 			question.append("Quels produit voulez vous acherter ?\n");
 			String produit = Clavier.entrerChaine(question.toString());
+			question.delete(0, question.length());
 			Gaulois[] listVendeur = controlAcheterProduit.getVendeurs(produit);
-			if (listVendeur.length == 0) {
-				System.out.println("Désolé, personne ne vend ce produit au marché.");
+			if (listVendeur == null) {
+				System.out.println("Desole, personne ne vend ce produit au marche.");
 			} else {
 				question.append("Chez quel marchand voulez vous acherter des " + produit + "?\n");
-				for (int i = 1; i < listVendeur.length; i++) {
-					question.append(i + " - " + listVendeur[i-1].getNom() + "\n");
+				for (int i = 0; i < listVendeur.length; i++) {
+					question.append((i+1) + " - " + listVendeur[i].getNom() + "\n");
 				}
-				int vendeur;
+				int idVendeur = -1;
 				do {
-					vendeur = Clavier.entrerEntier(question.toString());
-				} while (vendeur > 0 && vendeur <= listVendeur.length);
-				vendeur --;
-				question.append(nomAcheteur + " se déplace jusqu'à l'étal du vendeur " + listVendeur[vendeur]);
-				listVendeur[vendeur].parler("Bonjour " + nomAcheteur);
-				question.append("Combien de "+ produit +" voulez-vous acheter ?");
+					idVendeur = Clavier.entrerEntier(question.toString())-1;
+				} while (idVendeur < 0 && idVendeur >= listVendeur.length);
+				question.append(nomAcheteur + " se deplace jusqu'a l'etal du vendeur " + listVendeur[idVendeur].getNom() + "\n");
+				question.append("Bonjour " + nomAcheteur + "\n");
+				question.append("Combien de "+ produit +" voulez-vous acheter ?\n");
 				int quantite = Clavier.entrerEntier(question.toString());
-				
+				question.delete(0, question.length());
+				int nbAchete = controlAcheterProduit.acheterProduit(listVendeur[idVendeur].getNom(), quantite);
+				if (nbAchete == quantite) {
+					System.out.println(nomAcheteur + " achÃ¨te " + quantite + " " + produit 
+							+" Ã  " + listVendeur[idVendeur].getNom());
+				} else if (nbAchete == 0) {
+					System.out.println(nomAcheteur +" veut acheter " + quantite + " " + produit 
+							+", malheureusement il nâ€™y en a plus !");
+				} else {
+					System.out.println(nomAcheteur +" veut acheter " + quantite + " " + produit 
+							+", malheureusement " + listVendeur[idVendeur].getNom() + " nâ€™en a "
+							+ "plus que "+ nbAchete +". " + nomAcheteur +" achÃ¨te "
+							+ "tout le stock de " + listVendeur[idVendeur].getNom() +".");
+				}
 			}
 		}
 	}
