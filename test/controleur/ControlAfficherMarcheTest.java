@@ -18,11 +18,11 @@ class ControlAfficherMarcheTest {
 		village.setChef(new Chef("zhghzrj", 4, village));
 		ControlAfficherMarche ctrl = new ControlAfficherMarche(village);
 		
-		assertArrayEquals(ctrl.donnerInfoMarche(), new String[0]);
+		assertArrayEquals(ctrl.donnerInfosMarche(), new String[0]);
 		Gaulois bonemine = new Gaulois("Bonemine", 1);
 		village.ajouterHabitant(bonemine);
 		village.installerVendeur(bonemine, "Fleurs", 24);
-		assertArrayEquals(ctrl.donnerInfoMarche(), new String[] {"Bonemine", "24", "Fleurs"});		
+		assertArrayEquals(ctrl.donnerInfosMarche(), new String[] {"Bonemine", "24", "Fleurs"});		
 	}
 
 }

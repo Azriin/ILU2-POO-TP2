@@ -188,7 +188,7 @@ public class TestControleursDesCas {
 //		Obelix a 3 menhir sur son etal
 //		Achat de 2 menhirs sur 2
 //		Achat de 1 menhirs sur 3
-
+		
 	}
 
 }

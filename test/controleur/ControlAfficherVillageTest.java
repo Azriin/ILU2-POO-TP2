@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import personnages.Chef;
+import personnages.Druide;
 import personnages.Gaulois;
 import villagegaulois.Village;
 
@@ -26,6 +27,8 @@ class ControlAfficherVillageTest {
 		Gaulois bonemine = new Gaulois("Bonemine", 1);
 		village.ajouterHabitant(bonemine);
 		assertArrayEquals(ctrl.donnerNomsVillageois(), new String[] {"zhghzrj", "Bonemine"});
+		village.ajouterHabitant(new Druide("Panoramix", 3, 5, 15));
+		assertArrayEquals(ctrl.donnerNomsVillageois(), new String[] {"zhghzrj", "Bonemine", "le druide Panoramix"});
 		
 	}
 

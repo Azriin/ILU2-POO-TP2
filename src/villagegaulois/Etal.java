@@ -1,8 +1,9 @@
 package villagegaulois;
 
 import personnages.Gaulois;
+import personnages.Personnage;
 
-public class Etal {
+public class Etal{
 	private Gaulois vendeur;
 	private String produit;
 	private int quantiteDebutMarche;

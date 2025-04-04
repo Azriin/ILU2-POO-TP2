@@ -15,6 +15,7 @@ class ControlVerifierIdentiteTest {
 		Village village = new Village("aguiajgja", 15, 6);
 		village.setChef(new Chef("Abra", 5, village));
 		ControlVerifierIdentite ctrl = new ControlVerifierIdentite(village);	
+		assertTrue(ctrl.verifierIdentite("Abra"));
 		Gaulois bonemine = new Gaulois("Bonemine", 1);
 		assertFalse(ctrl.verifierIdentite("Bonemine"));
 		village.ajouterHabitant(bonemine);
